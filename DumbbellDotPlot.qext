@@ -1,0 +1,9 @@
+{
+	"name": "DumbbellDotPlot",
+	"description": "Dot plot which shows variance among two measures for a specific dimension",
+	"icon": "bar-chart-vertical",
+	"type": "visualization",
+	"version": 1,
+	"preview": "bar",
+	"author": "Stephen Triphahn"
+}
