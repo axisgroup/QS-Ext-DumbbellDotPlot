@@ -134,7 +134,13 @@ var viz = function(data, labels, height, width, id, layout) {
 
 
   //map an array to get the values of the metric
-  y.domain(data.map(function(d) { return d[0].qText; }));
+  y.domain(data.map(function(d) {
+		if(d[0].qIsOtherCell){
+			return "Others";
+		}
+		return d[0].qText;
+
+	}));
 
 	var yAxis_g = svg.append("g")
 			.attr("class", "y axis")
@@ -197,21 +203,41 @@ var viz = function(data, labels, height, width, id, layout) {
 	dumbBell.append('line')
 		.attr('x1', function(d) { return x(d[1].qNum); })
 		.attr('x2', function(d) { return x(d[2].qNum); })
-		.attr('y1', function (d) { return y(d[0].qText); })
-		.attr('y2', function (d) { return y(d[0].qText); })
+		.attr('y1', function (d) {
+			if(d[0].qIsOtherCell){
+				return y("Others");
+			}
+			return y(d[0].qText);
+		})
+		.attr('y2', function (d) {
+			if(d[0].qIsOtherCell){
+				return y("Others");
+			}
+			return y(d[0].qText);
+		})
 		.attr('stroke', layout.myproperties.color1)
 		.attr('stroke-width', 5);
 
 	dumbBell.append('circle')
 		.attr('r', 8)
 		.attr('cx', function(d){ return x(d[1].qNum); })
-		.attr('cy', function(d) { return y(d[0].qText); } )
+		.attr('cy', function(d) {
+			if(d[0].qIsOtherCell){
+				return y("Others");
+			}
+			return y(d[0].qText);
+		})
 		.attr('fill', layout.myproperties.color2);
 
 	dumbBell.append('circle')
 		.attr('r', 8)
 		.attr('cx', function (d) { return x(d[2].qNum); })
-		.attr('cy', function(d) { return y(d[0].qText); } )
+		.attr('cy', function(d) {
+			if(d[0].qIsOtherCell){
+				return y("Others");
+			}
+			return y(d[0].qText);
+		})
 		.attr('fill', layout.myproperties.color3);
 
 	//create and append the legend based on the measureInfo fallback titles
