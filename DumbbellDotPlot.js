@@ -81,8 +81,7 @@ define( ["jquery", "text!./DumbbellDotPlot.css", "./d3.min", "./axisAPI"], funct
 
                 //data matrix
 				matrix = layout.qHyperCube.qDataPages[0].qMatrix;
-              //  console.log(matrix);
-                console.log(layout);
+              
 
           		//measure labels array
             var measureLabels = layout.qHyperCube.qMeasureInfo.map(function (d) {
