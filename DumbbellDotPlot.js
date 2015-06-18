@@ -120,7 +120,7 @@ var viz = function(data, labels, height, width, id, layout) {
 
 
   //first create y scale in order to get correct margin space for dimension names
-  var y = d3.scale.ordinal().rangeRoundBands([0, height], 0.05);
+  var y = d3.scale.ordinal().rangeRoundPoints([0, height], 0.05);
   var yAxis = d3.svg.axis().scale(y).orient('left');
 
   var svg = d3.select("#"+id).append("svg")
@@ -199,7 +199,6 @@ var viz = function(data, labels, height, width, id, layout) {
 		.attr('x2', function(d) { return x(d[2].qNum); })
 		.attr('y1', function (d) { return y(d[0].qText); })
 		.attr('y2', function (d) { return y(d[0].qText); })
-		.attr('transform', 'translate(0, 10)')
 		.attr('stroke', layout.myproperties.color1)
 		.attr('stroke-width', 5);
 
@@ -207,15 +206,12 @@ var viz = function(data, labels, height, width, id, layout) {
 		.attr('r', 8)
 		.attr('cx', function(d){ return x(d[1].qNum); })
 		.attr('cy', function(d) { return y(d[0].qText); } )
-		//translate circles down by 10 in order for tick to be in middle of circle
-		.attr('transform', 'translate(0,10)')
 		.attr('fill', layout.myproperties.color2);
 
 	dumbBell.append('circle')
 		.attr('r', 8)
 		.attr('cx', function (d) { return x(d[2].qNum); })
 		.attr('cy', function(d) { return y(d[0].qText); } )
-		.attr('transform', 'translate(0,10)')
 		.attr('fill', layout.myproperties.color3);
 
 	//create and append the legend based on the measureInfo fallback titles
